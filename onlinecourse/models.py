@@ -57,9 +57,11 @@ class Course(models.Model):
     image = models.ImageField(upload_to='course_images/')
     description = models.CharField(max_length=1000)
     pub_date = models.DateField(null=True)
+
     instructors = models.ManyToManyField(Instructor)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Enrollment')
     total_enrollment = models.IntegerField(default=0)
+    
     is_enrolled = False
 
     def __str__(self):
@@ -132,7 +134,7 @@ class Choice(models.Model):
 # <HINT> The submission model
 class Submission(models.Model):
     # One enrollment could have multiple submission
-    enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
+    enrollment_id = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
     # One submission could have multiple choices
     # One choice could belong to multiple submissions
     choices = models.ManyToManyField(Choice)
