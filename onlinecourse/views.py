@@ -159,7 +159,7 @@ def show_exam_result(request, course_id, submission_id):
     total_score = 0
     for question in exam_questions:
         total_score += question.marks
-        if question.answered_correctly(selected_choices_ids):
+        if question.is_get_score(selected_choices_ids):
             score += question.marks
 
     context = {}
