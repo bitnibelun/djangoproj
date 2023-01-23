@@ -51,7 +51,7 @@
         <!--Display exam results-->
         {% for question in questions %}
                 <div class="card mt-1">
-                    <div class="card-header"><h5>{{ question.question_text}}</h5></div>
+                    <div class="card-header"><h5>{{ question.content}}</h5></div>
                     {% csrf_token %}
                     <div class="form-group ml-2">
                         {% for choice in question.choice_set.all %}
