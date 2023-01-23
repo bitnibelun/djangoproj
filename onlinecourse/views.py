@@ -153,14 +153,16 @@ def show_exam_result(request, course_id, submission_id):
     selected_choices_ids = Submission.objects.get(id=submission_id).choices.all()
 
     # For each selected choice, check if it is a correct answer or not
-    exam_questions = Question.objects.filter(courses=course_id)
+    # Cannot resolve keyword 'courses' into field. 
+    #   Choices are: choice, content, course_id, course_id_id, grade, id, lesson_id, lesson_id_id
+    exam_questions = Question.objects.filter(course_id=course_id)
 
     score = 0
     total_score = 0
     for question in exam_questions:
-        total_score += question.marks
+        total_score += question.grade
         if question.is_get_score(selected_choices_ids):
-            score += question.marks
+            score += question.grade
 
     context = {}
     context['course'] = course_obj
